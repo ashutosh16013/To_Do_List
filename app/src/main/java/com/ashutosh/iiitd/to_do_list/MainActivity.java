@@ -19,6 +19,9 @@ import helperClasses.ListItem;
 public class MainActivity extends AppCompatActivity {
     private Button mButton_for_todo;
     private Button mButton_to_view;
+    private static final String KEY_FOR_POSITION = "pos";
+    private static final String KEY_FOR_LIST = "list";
+    private static final String KEY_FOR_NUM = "num";
 
     private ArrayList<ListItem> itemList = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -50,8 +53,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ListItem item = itemList.get(position);
-                Intent intent_to_display = new Intent(MainActivity.this,Display_Details.class);
+                Intent intent_to_display = new Intent(MainActivity.this,Activity_View_Pager.class);
+                int num_rows = getRowCount();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(KEY_FOR_LIST, itemList);
+                intent_to_display.putExtra(KEY_FOR_POSITION,position);
+                intent_to_display.putExtra(KEY_FOR_NUM,num_rows);
+                intent_to_display.putExtras(bundle);
                 startActivity(intent_to_display);
                 overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
             }
@@ -91,5 +99,11 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(),"No items to display",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    int getRowCount(){
+        DBManager db = new DBManager(getApplicationContext());
+        int num = db.numberOfRows();
+        return(num);
     }
 }

@@ -1,10 +1,12 @@
 package helperClasses;
 
+import java.io.Serializable;
+
 /**
  * Created by Ashutosh on 31-10-2016.
  */
 
-public class ListItem {
+public class ListItem implements Serializable {
 
     private String title;
     private String details;

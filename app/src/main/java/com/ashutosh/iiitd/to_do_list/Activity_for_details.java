@@ -2,6 +2,7 @@ package com.ashutosh.iiitd.to_do_list;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 
 import helperClasses.DBManager;
 
-public class Activity_for_details extends AppCompatActivity {
+public class Activity_for_details extends AppCompatActivity  {
 
     private Button mButton_for_db;
     private EditText mText_for_title;
@@ -73,5 +74,12 @@ public class Activity_for_details extends AppCompatActivity {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    public void setDate(View v){
+
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+
     }
 }
