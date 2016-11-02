@@ -8,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import helperClasses.ListItem;
@@ -23,11 +20,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView details;
+        public TextView date;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.todo_title);
             details = (TextView)view.findViewById(R.id.todo_details);
+            date = (TextView)view.findViewById(R.id.todo_date);
         }
     }
 
@@ -48,6 +47,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>{
         ListItem item = itemList.get(position);
         holder.title.setText(item.getTitle());
         holder.details.setText(item.getDetails());
+        holder.date.setText(item.getDate());
 
     }
 

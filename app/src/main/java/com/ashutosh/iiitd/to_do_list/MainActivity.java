@@ -18,7 +18,6 @@ import helperClasses.ListItem;
 
 public class MainActivity extends AppCompatActivity {
     private Button mButton_for_todo;
-    private Button mButton_to_view;
     private static final String KEY_FOR_POSITION = "pos";
     private static final String KEY_FOR_LIST = "list";
     private static final String KEY_FOR_NUM = "num";
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new ListAdapter(itemList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -89,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
                 String temp[] = (String [])it.next();
                 String title = temp[0];
                 String details = temp[1];
-                ListItem temp_obj=  new ListItem(title,details);
+                String date = temp[2];
+                ListItem temp_obj=  new ListItem(title,details,date);
                 itemList.add(temp_obj);
                 i++;
             }

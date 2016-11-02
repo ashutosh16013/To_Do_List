@@ -16,17 +16,21 @@ public class View_Pager_Fragment extends Fragment {
 
     public static final String ARG_TITLE="title";
 
+    public static final String ARG_DATE= "date";
+
 
     private int mPageNumber;
     private String details;
     private String title;
+    private String date;
 
-    public static View_Pager_Fragment create(int pageNumber, String text, String title1) {
+    public static View_Pager_Fragment create(int pageNumber, String text, String title1,String date) {
         View_Pager_Fragment fragment = new View_Pager_Fragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, pageNumber);
         args.putString(ARG_DETAILS,text);
         args.putString(ARG_TITLE,title1);
+        args.putString(ARG_DATE,date);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,7 +43,7 @@ public class View_Pager_Fragment extends Fragment {
         super.onCreate(savedInstanceState);
         mPageNumber = getArguments().getInt(ARG_PAGE);
         details = getArguments().getString(ARG_DETAILS);
-
+        date = getArguments().getString(ARG_DATE);
         title = getArguments().getString(ARG_TITLE);
         Log.d("Hello",details+" "+title);
     }
@@ -54,6 +58,7 @@ public class View_Pager_Fragment extends Fragment {
         // Set the title view to show the page number.
         ((TextView) rootView.findViewById(R.id.text_title)).setText("ToDo "+(mPageNumber+1)+"-> "+title);
         ((TextView) rootView.findViewById(R.id.text_details)).setText(details);
+        ((TextView) rootView.findViewById(R.id.text_date)).setText(date);
 
         return rootView;
     }

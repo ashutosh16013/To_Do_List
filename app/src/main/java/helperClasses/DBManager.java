@@ -34,17 +34,16 @@ public class DBManager extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL(
                 "create table " +TABLE_NAME+" ("+TASKS_COLUMN_TITLE+" text, "+TASKS_COLUMN_DETAILS+" text, "+TASKS_COLUMN_TIME
-        +" DATETIME);");
+        +" text);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
     }
 
-    public boolean insertToDo (String title, String details)
+    public boolean insertToDo (String title, String details,String date)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -59,10 +58,7 @@ public class DBManager extends SQLiteOpenHelper {
         String query = "insert into grievance(id, name, filename, inserted_on) values('" + id + "', '" + name+ "', '" + filename + "', '" + d +"')";
         db.execSQL(query);
          */
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        String d = dateFormat.format(date);
-        contentValues.put(TASKS_COLUMN_TIME, d);
+        contentValues.put(TASKS_COLUMN_TIME, date);
         db.insert(TABLE_NAME, null, contentValues);
         return true;
     }
@@ -83,9 +79,10 @@ public class DBManager extends SQLiteOpenHelper {
         res.moveToFirst();
         String []temp;
         while(res.isAfterLast() == false){
-            temp = new String[2];
+            temp = new String[3];
             temp[0] = res.getString(res.getColumnIndex(TASKS_COLUMN_TITLE));
-            temp[1] = res.getString(res.getColumnIndex(TASKS_COLUMN_DETAILS));;
+            temp[1] = res.getString(res.getColumnIndex(TASKS_COLUMN_DETAILS));
+            temp[2] = res.getString(res.getColumnIndex(TASKS_COLUMN_TIME));
             array_list.add(temp);
             res.moveToNext();
         }

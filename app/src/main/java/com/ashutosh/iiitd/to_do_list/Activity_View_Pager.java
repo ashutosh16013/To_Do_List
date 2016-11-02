@@ -114,8 +114,9 @@ public class Activity_View_Pager extends FragmentActivity {
             //This method is to be utilised to send the position for array list
             String details = list_of_todo.get(position).getDetails();
             String title = list_of_todo.get(position).getTitle();
+            String date = list_of_todo.get(position).getDate();
             Log.d("Hello",details+" "+title);
-            return View_Pager_Fragment.create(position,details,title);
+            return View_Pager_Fragment.create(position,details,title,date);
         }
 
         @Override
