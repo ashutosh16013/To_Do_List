@@ -5,10 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 import helperClasses.ListItem;
 
-public class Activity_View_Pager extends FragmentActivity {
+public class Activity_View_Pager extends AppCompatActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
@@ -28,8 +29,8 @@ public class Activity_View_Pager extends FragmentActivity {
     int position;
 
     /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
+            * The pager widget, which handles animation and allows swiping horizontally to access previous
+    * and next wizard steps.
      */
     private ViewPager mPager;
 
@@ -42,6 +43,13 @@ public class Activity_View_Pager extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__view__pager);
+        //Initialise Toolbar for hierarchical navigation
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_for_pager);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Initialise toolbar end
         Bundle bundle_from_main = getIntent().getExtras();
         list_of_todo = (ArrayList<ListItem>)bundle_from_main.getSerializable("list");
         position = bundle_from_main.getInt("pos");
@@ -63,6 +71,7 @@ public class Activity_View_Pager extends FragmentActivity {
         });
         mPagerAdapter.notifyDataSetChanged();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
