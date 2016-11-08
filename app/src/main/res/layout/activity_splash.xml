@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
-    android:background="@color/splash_bg"
+    android:background="@color/white_text"
     tools:context="com.ashutosh.iiitd.to_do_list.Splash">
 
     <ImageView
         android:layout_height="100dp"
         android:layout_width="100dp"
-        android:background="@drawable/splash_bg"
+        android:background="@drawable/icon"
         android:layout_centerInParent="true">
     </ImageView>
 

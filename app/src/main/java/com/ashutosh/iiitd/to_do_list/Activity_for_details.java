@@ -8,6 +8,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -33,6 +35,10 @@ public class Activity_for_details extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_for_details);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_details);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mButton_for_db = (Button)findViewById(R.id.button_for_add);
         mText_for_title = (EditText)findViewById(R.id.input_title);
         mText_for_details = (EditText)findViewById(R.id.input_detail);
@@ -62,6 +68,16 @@ public class Activity_for_details extends AppCompatActivity  {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
     }
 
     @Override

@@ -2,17 +2,12 @@ package com.ashutosh.iiitd.to_do_list;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -48,7 +43,7 @@ public class Activity_View_Pager extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(0xFFFFFFFF);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         //Initialise toolbar end
         Bundle bundle_from_main = getIntent().getExtras();
         list_of_todo = (ArrayList<ListItem>)bundle_from_main.getSerializable("list");
@@ -73,44 +68,6 @@ public class Activity_View_Pager extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.activity__view__pager, menu);
-
-        menu.findItem(R.id.action_previous).setEnabled(mPager.getCurrentItem() > 0);
-
-        // Add either a "next" or "finish" button to the action bar, depending on which page
-        // is currently selected.
-        MenuItem item = menu.add(Menu.NONE, R.id.action_next, Menu.NONE, (mPager.getCurrentItem() == mPagerAdapter.getCount() - 1) ? R.string.action_finish : R.string.action_next);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // Navigate "up" the demo structure to the launchpad activity.
-                // See http://developer.android.com/design/patterns/navigation.html for more.
-                NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
-                return true;
-
-            case R.id.action_previous:
-                // Go to the previous step in the wizard. If there is no previous step,
-                // setCurrentItem will do nothing.
-                mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-                return true;
-
-            case R.id.action_next:
-                // Advance to the next step in the wizard. If there is no next step, setCurrentItem
-                // will do nothing.
-                mPager.setCurrentItem(mPager.getCurrentItem() + 1);
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -124,7 +81,6 @@ public class Activity_View_Pager extends AppCompatActivity {
             String details = list_of_todo.get(position).getDetails();
             String title = list_of_todo.get(position).getTitle();
             String date = list_of_todo.get(position).getDate();
-            Log.d("Hello",details+" "+title);
             return View_Pager_Fragment.create(position,details,title,date);
         }
 

@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLongClick(View view, int position) {
 
+                Toast.makeText(MainActivity.this, itemList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+
             }
         }));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
